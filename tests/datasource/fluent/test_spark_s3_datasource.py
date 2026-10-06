@@ -176,7 +176,7 @@ def test_recursive_file_lookup_drives_s3_file_discovery(
     """
     datasource = SparkS3Datasource(name="spark_s3_datasource", bucket=s3_bucket)
 
-    asset = datasource.add_parquet_asset(
+    asset = datasource.add_parquet_asset(  # type: ignore[attr-defined]
         name="partitioned_day",
         s3_prefix=_PARTITIONED_DAY_PREFIX,
         recursive_file_lookup=True,
@@ -192,7 +192,7 @@ def test_recursive_file_lookup_drives_s3_file_discovery_for_directory_asset(
 ):
     datasource = SparkS3Datasource(name="spark_s3_datasource", bucket=s3_bucket)
 
-    asset = datasource.add_directory_parquet_asset(
+    asset = datasource.add_directory_parquet_asset(  # type: ignore[attr-defined]
         name="partitioned_day",
         data_directory=_PARTITIONED_DAY_PREFIX,
         s3_prefix=_PARTITIONED_DAY_PREFIX,
@@ -210,7 +210,7 @@ def test_explicit_s3_recursive_file_discovery_overrides_recursive_file_lookup(
     datasource = SparkS3Datasource(name="spark_s3_datasource", bucket=s3_bucket)
 
     with pytest.raises(TestConnectionError, match='recursive file discovery set to "False"'):
-        datasource.add_parquet_asset(
+        datasource.add_parquet_asset(  # type: ignore[attr-defined]
             name="partitioned_day",
             s3_prefix=_PARTITIONED_DAY_PREFIX,
             recursive_file_lookup=True,
@@ -227,7 +227,7 @@ def test_recursive_file_lookup_reflected_in_test_connection_error_message(
     datasource = SparkS3Datasource(name="spark_s3_datasource", bucket=s3_bucket)
 
     with pytest.raises(TestConnectionError, match='recursive file discovery set to "True"'):
-        datasource.add_parquet_asset(
+        datasource.add_parquet_asset(  # type: ignore[attr-defined]
             name="empty_prefix",
             s3_prefix="empty_prefix/",
             recursive_file_lookup=True,
